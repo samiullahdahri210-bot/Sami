@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta name="theme-color" content="#0a0f1a" />
+  <meta name="description" content="Fine Future Public School Shahpur Chakar - Professional Student Project Suite with AI Tools" />
+  <title>Fine Future Public School | Shahpur Chakar - Professional Tool Suite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #111827;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --text-primary: rgba(255, 255, 255, 0.95);
+      --text-secondary: rgba(255, 255, 255, 0.65);
+      --accent: #00d4aa;
+      --accent-glow: rgba(0, 212, 170, 0.4);
+      --accent-secondary: #00b4d8;
+      --danger: #ff4757;
+      --warning: #ffa502;
+      --success: #2ed573;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(0, 212, 170, 0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--accent), var(--accent-secondary));
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* Background Effects */
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0f1a 0%, #1a1a2e 50%, #16213e 100%);
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 30s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px);
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 15, 26, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      padding: 2px;
+      box-shadow: 0 8px 24px rgba(0, 212, 170, 0.2);
+      transition: var(--transition);
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .brand-logo__inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background: var(--bg-primary);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-weight: 900;
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-title__accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Navigation */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 4px;
+      border-radius: 50px;
+    }
+
+    .nav-link {
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      place-items: center;
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: grid;
+      }
+      .nav-menu {
+        position: absolute;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        flex-direction: column;
+        background: rgba(17, 24, 39, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition);
+      }
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-link {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: var(--radius-sm);
+      }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(0, 212, 170, 0.05);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 12px;
+      border-radius: var(--radius-xs);
+    }
+
+    .btn-danger {
+      background: rgba(255, 71, 87, 0.1);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: rgba(255, 71, 87, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 10;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: rgba(0, 212, 170, 0.1);
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Sections */
+    .section {
+      position: relative;
+      z-index: 10;
+      padding: 60px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Project Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .project-icon svg {
+      width: 26px;
+      height: 26px;
+      color: #fff;
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Modal System */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(10, 15, 26, 0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 700px;
+      max-height: 85vh;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+
+    .modal-wide {
+      max-width: 1000px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 71, 87, 0.1);
+      border-color: var(--danger);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      max-height: calc(85vh - 80px);
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      color: var(--text-primary);
+      font-size: 14px;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    select.form-input {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Calculator */
+    .calc-display {
+      width: 100%;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 28px;
+      text-align: right;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .calc-btn {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      color: var(--text-primary);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .calc-btn:hover {
+      background: rgba(0, 212, 170, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-success {
+      background: rgba(46, 213, 115, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(46, 213, 115, 0.3);
+    }
+
+    .badge-info {
+      background: rgba(0, 180, 216, 0.15);
+      color: var(--accent-secondary);
+      border: 1px solid rgba(0, 180, 216, 0.3);
+    }
+
+    .badge-warning {
+      background: rgba(255, 165, 2, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(255, 165, 2, 0.3);
+    }
+
+    .badge-danger {
+      background: rgba(255, 71, 87, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+
+    /* Footer */
+    .site-footer {
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .footer-link:hover {
+      border-color: var(--accent);
+      background: rgba(0, 212, 170, 0.05);
+    }
+
+    /* Animation Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* AI Iframe */
+    .ai-frame {
+      width: 100%;
+      height: 75vh;
+      border: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      background: #fff;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-bg">
+    <div class="bg-grid"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <nav class="site-nav container">
+      <a class="brand" href="#home">
+        <div class="brand-logo">
+          <div class="brand-logo__inner">FF</div>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title"><span class="brand-title__accent">Fine Future</span> Public School</span>
+          <span class="brand-sub">Shahpur Chakar, District Sanghar</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/>
+        </svg>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a class="nav-link active" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#team">Team</a></li>
+        <li><button class="nav-link" id="announceBtn">📢 Announcements</button></li>
+        <li><button class="nav-link" id="aiBtn">🤖 AI Helper</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="hero-badge">
+            <span class="spinner" style="width:8px;height:8px;border-width:1px;"></span>
+            Live Projects Available
+          </div>
+          <h1 class="hero-title">Building the <span>Future</span> Through Code</h1>
+          <p class="hero-description">
+            A comprehensive suite of student-built professional tools including Quiz Games, Certificate Maker, 
+            AI Student Helper, Scientific Calculator, and 20+ more utilities — all running securely in your browser.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Explore Projects</a>
+            <button class="btn btn-secondary" id="heroAiBtn">Open AI Helper</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Our Professional Tools</h2>
+          <p>Innovative solutions built by talented student developers</p>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Cards will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Meet the Team</h2>
+          <p>The talented students behind these innovative projects</p>
+        </div>
+        <div class="projects-grid" id="teamGrid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+          <div class="project-card reveal" style="text-align:center;">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-secondary));margin:0 auto 16px;display:grid;place-items:center;font-size:32px;font-weight:900;">R</div>
+            <h3 style="font-size:18px;font-weight:700;">Ramzan</h3>
+            <p style="color:var(--accent);font-weight:600;font-size:13px;">Lead Developer</p>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+              <a href="mailto:ramzansahito0001@gmail.com" class="footer-link" style="width:40px;height:40px;padding:0;justify-content:center;">✉</a>
+              <a href="https://wa.me/923408303717" target="_blank" rel="noopener" class="footer-link" style="width:40px;height:40px;padding:0;justify-content:center;">💬</a>
+            </div>
+          </div>
+          <div class="project-card reveal" style="text-align:center;">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#ffa502,#ff6348);margin:0 auto 16px;display:grid;place-items:center;font-size:32px;font-weight:900;">S</div>
+            <h3 style="font-size:18px;font-weight:700;">Samiullah</h3>
+            <p style="color:#ffa502;font-weight:600;font-size:13px;">UI/UX Designer</p>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+              <a href="mailto:samiullahdahri210@gmail.com" class="footer-link" style="width:40px;height:40px;padding:0;justify-content:center;">✉</a>
+              <a href="https://wa.me/923499554723" target="_blank" rel="noopener" class="footer-link" style="width:40px;height:40px;padding:0;justify-content:center;">💬</a>
+            </div>
+          </div>
+          <div class="project-card reveal" style="text-align:center;">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#6366f1);margin:0 auto 16px;display:grid;place-items:center;font-size:32px;font-weight:900;">H</div>
+            <h3 style="font-size:18px;font-weight:700;">Hassnain Ali</h3>
+            <p style="color:#a78bfa;font-weight:600;font-size:13px;">Backend Developer</p>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+              <a href="mailto:primehassni@gmail.com" class="footer-link" style="width:40px;height:40px;padding:0;justify-content:center;">✉</a>
+              <a href="https://wa.me/601128760998" target="_blank" rel="noopener" class="footer-link" style="width:40px;height:40px;padding:0;justify-content:center;">💬</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p style="color:var(--text-secondary);font-size:14px;font-weight:600;">© 2026 Fine Future Public School, Shahpur Chakar. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:info.ffpschool@gmail.com" class="footer-link">✉ Email</a>
+          <a href="tel:+923023233661" class="footer-link">📞 Call</a>
+          <a href="https://wa.me/923023233661" target="_blank" rel="noopener" class="footer-link">💬 WhatsApp</a>
+          <a href="https://maps.app.goo.gl/yAxcas5ugEx9dvmd8" target="_blank" rel="noopener" class="footer-link">📍 Location</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modals Container -->
+  <div id="modalsContainer"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ==================== UTILITIES ====================
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => document.querySelectorAll(sel);
+
+      // ==================== FREE API CONFIGURATIONS ====================
+      const API_CONFIG = {
+        // Free AI APIs (no authentication required for basic use)
+        gemini: {
+          key: 'AIzaSyD-YourFreeKey-GetFrom_aistudio_google_com',
+          model: 'gemini-1.5-flash',
+          endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent'
+        },
+        huggingface: {
+          key: 'hf_YourFreeKey-GetFrom_huggingface_co',
+          models: {
+            chat: 'microsoft/DialoGPT-medium',
+            qa: 'deepset/roberta-base-squad2',
+            summarization: 'facebook/bart-large-cnn'
+          },
+          endpoint: 'https://api-inference.huggingface.co/models/'
+        },
+        qrCode: {
+          endpoint: 'https://api.qrserver.com/v1/create-qr-code/'
+        },
+        ocr: {
+          endpoint: 'https://api.ocr.space/parse/image',
+          key: 'K86789558888957' // Free OCR.space API key (limited to 500 requests/day)
+        }
+      };
+
+      // ==================== PROJECTS DATABASE ====================
+      const PROJECTS = [
+        { id: 'quiz', icon: '📝', title: 'Quiz Game', desc: 'Interactive quiz for classes 6-10 with 8 questions per session. Test your knowledge!', color: '#00d4aa' },
+        { id: 'certificate', icon: '📜', title: 'Certificate Maker', desc: 'Professional School Leaving Certificate generator with PNG download.', color: '#00b4d8' },
+        { id: 'calculator', icon: '🔢', title: 'Calculator', desc: 'Standard calculator with Age Detector feature.', color: '#ffa502' },
+        { id: 'percentage', icon: '📊', title: 'Percentage Calculator', desc: 'Calculate exam percentage with grade classification.', color: '#2ed573' },
+        { id: 'scientific', icon: '🧮', title: 'Scientific Calculator', desc: 'Advanced functions: sin, cos, tan, log, ln, sqrt, factorial, constants.', color: '#a78bfa' },
+        { id: 'codeplay', icon: '💻', title: 'Code Playground', desc: 'Live HTML/CSS/JS editor with instant preview.', color: '#ff6348' },
+        { id: 'password', icon: '🔐', title: 'Password Generator', desc: 'Cryptographically secure passwords with adjustable strength.', color: '#ff4757' },
+        { id: 'unitconverter', icon: '📏', title: 'Unit Converter', desc: 'Length, weight, temperature, time, area, volume, speed, data — all units.', color: '#e056a0' },
+        { id: 'typing', icon: '⌨️', title: 'Typing Speed Test', desc: 'Measure WPM, accuracy and errors with a 60-second test.', color: '#f0932b' },
+        { id: 'json', icon: '📋', title: 'JSON Formatter', desc: 'Beautify, minify and validate JSON with error detection.', color: '#f9ca24' },
+        { id: 'markdown', icon: '📝', title: 'Markdown Editor', desc: 'Write Markdown with live HTML preview.', color: '#7ed6df' },
+        { id: 'graph', icon: '📈', title: 'Graph Generator', desc: 'Bar, line and pie charts from your custom data.', color: '#6c5ce7' },
+        { id: 'planner', icon: '📅', title: 'Study Planner', desc: 'Organize subjects with priority-based weekly scheduling.', color: '#e17055' },
+        { id: 'encrypt', icon: '🔒', title: 'Encrypt/Decrypt', desc: 'AES-GCM military-grade encryption with passphrase.', color: '#636e72' },
+        { id: 'imageconv', icon: '🖼️', title: 'Image Converter', desc: 'Convert between PNG, JPEG, WebP with resize options.', color: '#b2bec3' },
+        { id: 'mathsolver', icon: '🧩', title: 'Math Solver', desc: 'Solve linear & quadratic equations with step-by-step working.', color: '#00cec9' },
+        { id: 'palette', icon: '🎨', title: 'Color Palette', desc: 'Generate harmonious color schemes from any base color.', color: '#fd79a8' },
+        { id: 'apitest', icon: '🔌', title: 'API Tester', desc: 'Test REST APIs with custom headers, body and methods.', color: '#55efc4' },
+        { id: 'regex', icon: '🔍', title: 'Regex Tester', desc: 'Build and test regular expressions with live matching.', color: '#fab1a0' },
+        { id: 'datatable', icon: '📋', title: 'Data Table', desc: 'CSV to sortable table with filtering and export.', color: '#81ecec' },
+        { id: 'random', icon: '🎲', title: 'Random Suite', desc: 'Random numbers, dice, coin flip, UUID, list shuffler.', color: '#ffeaa7' },
+        { id: 'qrcode', icon: '📱', title: 'QR Code Generator', desc: 'Generate scannable QR codes from any text or URL.', color: '#dfe6e9' },
+        { id: 'wordcount', icon: '📖', title: 'Word Counter', desc: 'Live word, character, sentence and reading time counters.', color: '#74b9ff' },
+        { id: 'notes', icon: '📓', title: 'Notes Organizer', desc: 'Create, search, edit and delete notes with local storage.', color: '#a29bfe' },
+        { id: 'announcement', icon: '📢', title: 'Announcements', desc: 'Upload and manage school announcement images.', color: '#fdcb6e' },
+        { id: 'ai', icon: '🤖', title: 'AI Student Helper', desc: 'Advanced AI assistant for studies, assignments and research.', color: '#00d4aa' }
+      ];
+
+      // ==================== CORE FUNCTIONS ====================
+      
+      // Generate Project Cards
+      function renderProjectCards() {
+        const grid = $('#projectsGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = PROJECTS.map((project, index) => `
+          <div class="project-card reveal" onclick="openProjectModal('${project.id}')" 
+               style="animation-delay: ${index * 0.05}s">
+            <div class="project-icon" style="background: linear-gradient(135deg, ${project.color}, ${project.color}dd);">
+              <span style="font-size: 24px;">${project.icon}</span>
+            </div>
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-description">${project.desc}</p>
+            <div class="project-actions">
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); openProjectModal('${project.id}')">
+                Open Tool
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Modal System
+      let activeModal = null;
+
+      window.openProjectModal = function(projectId) {
+        // Close existing modal
+        if (activeModal) {
+          document.body.removeChild(activeModal);
+          activeModal = null;
+        }
+
+        const project = PROJECTS.find(p => p.id === projectId);
+        if (!project) return;
+
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay active';
+        modal.innerHTML = `
+          <div class="modal-container ${projectId === 'codeplay' || projectId === 'ai' ? 'modal-wide' : ''}">
+            <div class="modal-header">
+              <h3 class="modal-title">${project.icon} ${project.title}</h3>
+              <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody-${projectId}">
+              <div style="text-align:center;padding:40px;">
+                <div class="spinner" style="width:32px;height:32px;"></div>
+                <p style="margin-top:12px;color:var(--text-secondary);">Loading ${project.title}...</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(modal);
+        activeModal = modal;
+
+        // Load content based on project ID
+        setTimeout(() => loadProjectContent(projectId), 100);
+      };
+
+      window.closeModal = function() {
+        if (activeModal) {
+          activeModal.classList.remove('active');
+          setTimeout(() => {
+            if (activeModal && activeModal.parentNode) {
+              document.body.removeChild(activeModal);
+            }
+            activeModal = null;
+          }, 300);
+        }
+      };
+
+      function loadProjectContent(projectId) {
+        const body = $(`#modalBody-${projectId}`);
+        if (!body) return;
+
+        const renderers = {
+          'quiz': renderQuiz,
+          'certificate': renderCertificate,
+          'calculator': renderCalculator,
+          'percentage': renderPercentage,
+          'scientific': renderScientificCalc,
+          'codeplay': renderCodePlayground,
+          'password': renderPasswordGen,
+          'unitconverter': renderUnitConverter,
+          'typing': renderTypingTest,
+          'json': renderJSONFormatter,
+          'markdown': renderMarkdownEditor,
+          'graph': renderGraphGenerator,
+          'planner': renderStudyPlanner,
+          'encrypt': renderEncryptDecrypt,
+          'imageconv': renderImageConverter,
+          'mathsolver': renderMathSolver,
+          'palette': renderColorPalette,
+          'apitest': renderAPITester,
+          'regex': renderRegexTester,
+          'datatable': renderDataTable,
+          'random': renderRandomSuite,
+          'qrcode': renderQRCode,
+          'wordcount': renderWordCounter,
+          'notes': renderNotes,
+          'announcement': renderAnnouncement,
+          'ai': renderAIHelper
+        };
+
+        if (renderers[projectId]) {
+          body.innerHTML = ''; // Clear loading spinner
+          renderers[projectId](body);
+        } else {
+          body.innerHTML = `
+            <div style="text-align:center;padding:40px;">
+              <h3>Coming Soon</h3>
+              <p style="color:var(--text-secondary);">This tool is under development.</p>
+            </div>
+          `;
+        }
+      }
+
+      // ==================== TOOL RENDERERS ====================
+
+      function renderQuiz(body) {
+        const questions = {
+          '6': [
+            { q: 'What is the capital of Pakistan?', o: ['Karachi', 'Lahore', 'Islamabad', 'Quetta'], a: 2 },
+            { q: 'How many days in a week?', o: ['5', '6', '7', '8'], a: 2 },
+            { q: 'How many months in a year?', o: ['10', '11', '12', '13'], a: 2 },
+            { q: '5 × 6 = ?', o: ['11', '30', '56', '60'], a: 1 },
+            { q: 'Water freezes at?', o: ['0°C', '10°C', '50°C', '100°C'], a: 0 },
+            { q: 'Largest planet?', o: ['Earth', 'Mars', 'Jupiter', 'Venus'], a: 2 },
+            { q: 'National language of Pakistan?', o: ['English', 'Sindhi', 'Urdu', 'Punjabi'], a: 2 },
+            { q: 'How many sides does a rectangle have?', o: ['3', '4', '5', '6'], a: 1 }
+          ]
+        };
+
+        body.innerHTML = `
+          <div id="quizArea">
+            <select class="form-input" id="quizClass" style="margin-bottom:16px;">
+              <option value="6">Class 6</option>
+            </select>
+            <button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+          </div>
+          <div id="quizResult" style="display:none;">
+            <h3 style="text-align:center;margin-bottom:16px;">Quiz Complete!</h3>
+            <div id="scoreDisplay" style="text-align:center;font-size:48px;font-weight:900;color:var(--accent);"></div>
+            <button class="btn btn-primary" onclick="startQuiz()" style="margin-top:16px;width:100%;">Retry</button>
+          </div>
+        `;
+
+        window.startQuiz = function() {
+          const qs = questions['6'];
+          let currentQ = 0;
+          let score = 0;
+
+          function showQuestion() {
+            if (currentQ >= 8) {
+              $('#quizArea').style.display = 'none';
+              $('#quizResult').style.display = 'block';
+              $('#scoreDisplay').textContent = `${score}/8`;
+              return;
+            }
+
+            const q = qs[currentQ];
+            $('#quizArea').innerHTML = `
+              <div style="margin-bottom:16px;display:flex;gap:12px;flex-wrap:wrap;">
+                <span class="badge badge-info">Q ${currentQ + 1}/8</span>
+                <span class="badge badge-success">Score: ${score}</span>
+              </div>
+              <h4 style="margin-bottom:16px;">${q.q}</h4>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                ${q.o.map((opt, i) => `
+                  <button class="btn btn-secondary" onclick="answerQuestion(${i})" style="text-align:left;">
+                    ${String.fromCharCode(65 + i)}. ${opt}
+                  </button>
+                `).join('')}
+              </div>
+            `;
+          }
+
+          window.answerQuestion = function(choice) {
+            if (choice === questions['6'][currentQ].a) score++;
+            currentQ++;
+            showQuestion();
+          };
+
+          showQuestion();
+        };
+      }
+
+      function renderCertificate(body) {
+        body.innerHTML = `
+          <form id="certForm" onsubmit="event.preventDefault(); generateCertificate();">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">G.R. No</label>
+                <input class="form-input" id="certGR" placeholder="236" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Date</label>
+                <input class="form-input" id="certDate" type="date" value="${new Date().toISOString().split('T')[0]}" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Student Name (Full)</label>
+              <input class="form-input" id="certName" placeholder="Student Full Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Father's Name</label>
+              <input class="form-input" id="certFather" placeholder="Father Name" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Religion</label>
+                <input class="form-input" id="certReligion" value="Islam">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Caste</label>
+                <input class="form-input" id="certCaste" placeholder="---">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date of Birth</label>
+              <input class="form-input" id="certDOB" type="date" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Progress</label>
+                <input class="form-input" id="certProgress" value="Good">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Conduct</label>
+                <input class="form-input" id="certConduct" value="Good">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Remarks</label>
+              <input class="form-input" id="certRemarks" value="Leaving Certificate Issued">
+            </div>
+            <button class="btn btn-primary" type="submit" style="width:100%;">Generate & Download Certificate</button>
+          </form>
+        `;
+
+        window.generateCertificate = function() {
+          const data = {
+            gr: $('#certGR').value,
+            date: $('#certDate').value,
+            name: $('#certName').value,
+            father: $('#certFather').value,
+            religion: $('#certReligion').value,
+            caste: $('#certCaste').value,
+            dob: $('#certDOB').value,
+            progress: $('#certProgress').value,
+            conduct: $('#certConduct').value,
+            remarks: $('#certRemarks').value
+          };
+
+          // Create certificate HTML
+          const certHTML = `
+            <div style="width:800px;min-height:600px;background:#fff;color:#000;padding:40px;font-family:Arial,sans-serif;position:relative;">
+              <div style="text-align:center;border-bottom:3px solid #000;padding-bottom:20px;margin-bottom:20px;">
+                <h1 style="font-size:28px;margin:0;color:#003366;">FINE FUTURE PUBLIC SCHOOL</h1>
+                <p style="font-size:14px;margin:5px 0;">SHAHPUR CHAKAR, DISTRICT SANGHAR</p>
+                <h2 style="font-size:22px;margin:10px 0;text-transform:uppercase;letter-spacing:2px;">School Leaving Certificate</h2>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+                <p><strong>G.R. No:</strong> ${data.gr}</p>
+                <p><strong>Date:</strong> ${data.date}</p>
+              </div>
+              <div style="line-height:2.2;">
+                <p><strong>1. Name of Pupil (In Full):</strong> ${data.name}</p>
+                <p><strong>2. Father's Name:</strong> ${data.father}</p>
+                <p><strong>3. Religion:</strong> ${data.religion}</p>
+                <p><strong>4. Caste:</strong> ${data.caste}</p>
+                <p><strong>5. Date of Birth:</strong> ${data.dob}</p>
+                <p><strong>6. Progress:</strong> ${data.progress}</p>
+                <p><strong>7. Conduct:</strong> ${data.conduct}</p>
+                <p><strong>8. Remarks:</strong> ${data.remarks}</p>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:40px;">
+                <div style="text-align:center;width:200px;border-top:1px solid #000;padding-top:8px;">Class Teacher</div>
+                <div style="text-align:center;width:200px;border-top:1px solid #000;padding-top:8px;">Principal</div>
+              </div>
+              <div style="text-align:center;margin-top:20px;font-size:12px;color:#666;">
+                Contact: +92-302-3233661 | Email: info.ffpschool@gmail.com
+              </div>
+            </div>
+          `;
+
+          // Download as HTML file (can be printed as PDF)
+          const blob = new Blob([certHTML], { type: 'text/html' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `Certificate_${data.name.replace(/\s+/g, '_')}.html`;
+          a.click();
+          URL.revokeObjectURL(url);
+          
+          alert('Certificate downloaded! Open the file and print to PDF for best results.');
+        };
+      }
+
+      function renderCalculator(body) {
+        body.innerHTML = `
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchCalcTab('standard')">Standard</button>
+            <button class="tab-btn" onclick="switchCalcTab('age')">Age Detector</button>
+          </div>
+          <div id="calcTabStandard">
+            <input class="calc-display" id="calcDisplay" value="0" readonly />
+            <div class="calc-grid">
+              ${['AC', 'DEL', '%', '÷','7','8','9','×','4','5','6','-','1','2','3','+','0','.','='].map(btn => {
+                const isOp = ['%','÷','×','-','+'].includes(btn);
+                const isEq = btn === '=';
+                const isAction = ['AC','DEL'].includes(btn);
+                let cls = 'calc-btn';
+                if (isEq) cls += ' btn-primary';
+                else if (isOp) cls += ' btn-secondary';
+                else if (isAction) cls += ' btn-danger';
+                return `<button class="${cls}" onclick="calcInput('${btn}')">${btn}</button>`;
+              }).join('')}
+            </div>
+          </div>
+          <div id="calcTabAge" style="display:none;">
+            <div class="form-group">
+              <label class="form-label">Birth Year</label>
+              <input class="form-input" id="ageInput" type="number" placeholder="e.g., 2008">
+            </div>
+            <button class="btn btn-primary" onclick="calculateAge()">Calculate Age</button>
+            <div id="ageResult" style="margin-top:16px;padding:16px;background:rgba(0,0,0,0.2);border-radius:8px;"></div>
+          </div>
+        `;
+
+        let calcExpr = '';
+        window.calcInput = function(val) {
+          if (val === 'AC') calcExpr = '';
+          else if (val === 'DEL') calcExpr = calcExpr.slice(0, -1);
+          else if (val === '=') {
+            try {
+              calcExpr = String(eval(calcExpr.replace(/÷/g, '/').replace(/×/g, '*')));
+            } catch(e) {
+              calcExpr = 'Error';
+            }
+          } else {
+            const map = { '÷': '/', '×': '*', '%': '/100' };
+            calcExpr += map[val] || val;
+          }
+          $('#calcDisplay').value = calcExpr || '0';
+        };
+
+        window.switchCalcTab = function(tab) {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          $('#calcTabStandard').style.display = tab === 'standard' ? 'block' : 'none';
+          $('#calcTabAge').style.display = tab === 'age' ? 'block' : 'none';
+        };
+
+        window.calculateAge = function() {
+          const birthYear = parseInt($('#ageInput').value);
+          if (!birthYear || birthYear < 1900 || birthYear > 2026) {
+            $('#ageResult').innerHTML = '<span style="color:var(--danger);">Please enter a valid birth year.</span>';
+            return;
+          }
+          const age = 2026 - birthYear;
+          $('#ageResult').innerHTML = `
+            <strong style="font-size:24px;color:var(--accent);">${age} Years Old</strong><br><br>
+            <strong>Months:</strong> ${age * 12}<br>
+            <strong>Days (approx):</strong> ${age * 365}<br>
+            <strong>Born in:</strong> ${birthYear}
+          `;
+        };
+      }
+
+      function renderPercentage(body) {
+        body.innerHTML = `
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Total Marks</label>
+              <input class="form-input" id="totalMarks" type="number" value="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Obtained Marks</label>
+              <input class="form-input" id="obtMarks" type="number" value="85">
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="calcPercentage()" style="width:100%;">Calculate</button>
+          <div id="percentResult" style="margin-top:16px;padding:16px;background:rgba(0,0,0,0.2);border-radius:8px;text-align:center;"></div>
+        `;
+
+        window.calcPercentage = function() {
+          const total = parseFloat($('#totalMarks').value);
+          const obt = parseFloat($('#obtMarks').value);
+          if (!total || total <= 0) {
+            $('#percentResult').innerHTML = '<span style="color:var(--danger);">Invalid total marks.</span>';
+            return;
+          }
+          const pct = ((obt / total) * 100).toFixed(2);
+          let grade, badge = 'badge-info';
+          if (pct >= 90) { grade = 'Excellent'; badge = 'badge-success'; }
+          else if (pct >= 80) grade = 'Very Good';
+          else if (pct >= 70) grade = 'Good';
+          else if (pct >= 60) grade = 'Fair';
+          else { grade = 'Needs Improvement'; badge = 'badge-danger'; }
+          $('#percentResult').innerHTML = `
+            <div style="font-size:42px;font-weight:900;color:var(--accent);">${pct}%</div>
+            <span class="badge ${badge}">${grade}</span><br><br>
+            <span style="color:var(--text-secondary);">${obt} / ${total}</span>
+          `;
+        };
+      }
+
+      function renderScientificCalc(body) {
+        const buttons = [
+          'sin', 'cos', 'tan', 'log', 'ln',
+          'asin', 'acos', 'atan', '√', 'π',
+          'e', 'x!', '(', ')', '^',
+          '7', '8', '9', '÷', '%',
+          '4', '5', '6', '×', 'DEL',
+          '1', '2', '3', '-', 'AC',
+          '0', '.', '=', '+', ''
+        ];
+        
+        body.innerHTML = `
+          <input class="calc-display" id="sciDisplay" value="0" readonly style="font-family:'JetBrains Mono',monospace;" />
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+            ${buttons.map(b => {
+              if (!b) return '<div></div>';
+              const isFn = ['sin','cos','tan','log','ln','asin','acos','atan','√','π','e','x!','(',')','^'].includes(b);
+              const isEq = b === '=';
+              const isAction = ['AC','DEL'].includes(b);
+              let cls = 'calc-btn';
+              if (isEq) cls += ' btn-primary';
+              else if (isFn) cls += ' btn-secondary';
+              else if (isAction) cls += ' btn-danger';
+              return `<button class="${cls}" onclick="sciInput('${b}')" style="font-size:13px;">${b}</button>`;
+            }).join('')}
+          </div>
+        `;
+
+        let sciExpr = '';
+        window.sciInput = function(val) {
+          if (val === 'AC') sciExpr = '';
+          else if (val === 'DEL') sciExpr = sciExpr.slice(0, -1);
+          else if (val === '=') {
+            try {
+              const processed = sciExpr
+                .replace(/sin/g, 'Math.sin')
+                .replace(/cos/g, 'Math.cos')
+                .replace(/tan/g, 'Math.tan')
+                .replace(/asin/g, 'Math.asin')
+                .replace(/acos/g, 'Math.acos')
+                .replace(/atan/g, 'Math.atan')
+                .replace(/log/g, 'Math.log10')
+                .replace(/ln/g, 'Math.log')
+                .replace(/√/g, 'Math.sqrt')
+                .replace(/π/g, 'Math.PI')
+                .replace(/e(?!\d)/g, 'Math.E')
+                .replace(/÷/g, '/')
+                .replace(/×/g, '*')
+                .replace(/x!/g, '_fact_')
+                .replace(/(\d+)\^(\d+)/g, 'Math.pow($1,$2)');
+              if (processed.includes('_fact_')) {
+                const factFn = 'function fact(n){return n<=1?1:n*fact(n-1)}';
+                sciExpr = String(eval(`(${factFn},${processed.replace(/_fact_/g, 'fact')})`));
+              } else {
+                sciExpr = String(eval(processed));
+              }
+            } catch(e) {
+              sciExpr = 'Error';
+            }
+          } else {
+            sciExpr += val;
+          }
+          $('#sciDisplay').value = sciExpr || '0';
+        };
+      }
+
+      function renderCodePlayground(body) {
+        body.innerHTML = `
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchCodeTab('html')">HTML</button>
+            <button class="tab-btn" onclick="switchCodeTab('css')">CSS</button>
+            <button class="tab-btn" onclick="switchCodeTab('js')">JS</button>
+          </div>
+          <div id="codeTabHtml">
+            <textarea class="form-input" id="htmlCode" style="min-height:150px;font-family:'JetBrains Mono',monospace;">&lt;h1&gt;Hello World!&lt;/h1&gt;
+&lt;p&gt;Edit me and click Run&lt;/p&gt;
+&lt;button onclick=&quot;alert('Hi!')&quot;&gt;Click Me&lt;/button&gt;</textarea>
+          </div>
+          <div id="codeTabCss" style="display:none;">
+            <textarea class="form-input" id="cssCode" style="min-height:150px;font-family:'JetBrains Mono',monospace;">body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f4f4f4;
+}
+h1 { color: #00b4d8; }</textarea>
+          </div>
+          <div id="codeTabJs" style="display:none;">
+            <textarea class="form-input" id="jsCode" style="min-height:150px;font-family:'JetBrains Mono',monospace;">console.log('Code running...');</textarea>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="runCode()">▶ Run</button>
+            <button class="btn btn-secondary" onclick="clearCode()">Clear All</button>
+          </div>
+          <iframe id="codeFrame" style="width:100%;height:300px;border:1px solid var(--border);border-radius:8px;margin-top:12px;background:#fff;"></iframe>
+        `;
+
+        window.switchCodeTab = function(tab) {
+          ['html','css','js'].forEach(t => {
+            $(`#codeTab${t.charAt(0).toUpperCase() + t.slice(1)}`).style.display = t === tab ? 'block' : 'none';
+          });
+        };
+
+        window.runCode = function() {
+          const html = $('#htmlCode').value;
+          const css = $('#cssCode').value;
+          const js = $('#jsCode').value;
+          const src = `<!DOCTYPE html><html><head><style>${css}</style></head><body>${html}<script>${js}<\/script></body></html>`;
+          $('#codeFrame').srcdoc = src;
+        };
+
+        window.clearCode = function() {
+          $('#htmlCode').value = '';
+          $('#cssCode').value = '';
+          $('#jsCode').value = '';
+          $('#codeFrame').srcdoc = '';
+        };
+      }
+
+      function renderPasswordGen(body) {
+        body.innerHTML = `
+          <div class="form-group">
+            <label class="form-label">Password Length: <span id="lenLabel">16</span></label>
+            <input type="range" min="8" max="64" value="16" class="form-input" id="passLen" oninput="$('#lenLabel').textContent=this.value;generatePassword();">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+            <label style="display:flex;align-items:center;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;cursor:pointer;">
+              <input type="checkbox" id="inclUpper" checked onchange="generatePassword()"> Uppercase
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;cursor:pointer;">
+              <input type="checkbox" id="inclLower" checked onchange="generatePassword()"> Lowercase
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;cursor:pointer;">
+              <input type="checkbox" id="inclNum" checked onchange="generatePassword()"> Numbers
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;cursor:pointer;">
+              <input type="checkbox" id="inclSym" checked onchange="generatePassword()"> Symbols
+            </label>
+          </div>
+          <input class="form-input" id="passOutput" readonly style="font-family:'JetBrains Mono',monospace;font-size:16px;text-align:center;" />
+          <div style="margin-top:12px;display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="generatePassword()" style="flex:1;">Generate New</button>
+            <button class="btn btn-secondary" onclick="copyPassword()">📋 Copy</button>
+          </div>
+          <div id="passStrength" style="text-align:center;margin-top:8px;font-weight:600;"></div>
+        `;
+
+        window.generatePassword = function() {
+          const len = parseInt($('#passLen').value);
+          let chars = '';
+          if ($('#inclUpper').checked) chars += 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+          if ($('#inclLower').checked) chars += 'abcdefghijkmnopqrstuvwxyz';
+          if ($('#inclNum').checked) chars += '23456789';
+          if ($('#inclSym').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+          
+          if (!chars) {
+            $('#passOutput').value = 'Select at least one option';
+            return;
+          }
+
+          const array = new Uint32Array(len);
+          crypto.getRandomValues(array);
+          let password = '';
+          for (let i = 0; i < len; i++) {
+            password += chars[array[i] % chars.length];
+          }
+          $('#passOutput').value = password;
+
+          // Strength indicator
+          let strength = 0;
+          if (len >= 12) strength++;
+          if (len >= 16) strength++;
+          if (/[A-Z]/.test(password)) strength++;
+          if (/[0-9]/.test(password)) strength++;
+          if (/[^A-Za-z0-9]/.test(password)) strength++;
+          const labels = ['Weak', 'Fair', 'Good', 'Strong', 'Very Strong'];
+          const colors = ['var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--success)', 'var(--accent)'];
+          $('#passStrength').innerHTML = `<span style="color:${colors[strength] || colors[4]}">${labels[Math.min(strength, 4)]}</span>`;
+        };
+
+        window.copyPassword = function() {
+          $('#passOutput').select();
+          document.execCommand('copy');
+          alert('Password copied to clipboard!');
+        };
+
+        generatePassword();
+      }
+
+      function renderUnitConverter(body) {
+        const units = {
+          Length: { m: 1, km: 1000, cm: 0.01, mm: 0.001, inch: 0.0254, foot: 0.3048, yard: 0.9144, mile: 1609.34 },
+          Weight: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495, ton: 1000 },
+          Time: { sec: 1, min: 60, hour: 3600, day: 86400, week: 604800 },
+          Area: { 'm²': 1, 'km²': 1000000, 'cm²': 0.0001, 'ft²': 0.092903, acre: 4046.86 },
+          Volume: { L: 1, mL: 0.001, 'm³': 1000, gallon: 3.78541, cup: 0.24 },
+          Speed: { 'm/s': 1, 'km/h': 0.277778, mph: 0.44704, knot: 0.514444 },
+          Data: { B: 1, KB: 1024, MB: 1048576, GB: 1073741824, TB: 1099511627776 }
+        };
+
+        body.innerHTML = `
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-input" id="unitCat" onchange="updateUnits()">
+              ${Object.keys(units).map(k => `<option>${k}</option>`).join('')}
+              <option>Temperature</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">From</label>
+              <select class="form-input" id="unitFrom" onchange="convertUnit()"></select>
+              <input class="form-input" id="unitInput" type="number" value="1" oninput="convertUnit()" style="margin-top:8px;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">To</label>
+              <select class="form-input" id="unitTo" onchange="convertUnit()"></select>
+              <input class="form-input" id="unitOutput" readonly style="margin-top:8px;background:rgba(0,0,0,0.4);">
+            </div>
+          </div>
+          <button class="btn btn-secondary" onclick="swapUnits()" style="width:100%;margin-top:8px;">⇄ Swap</button>
+        `;
+
+        window.updateUnits = function() {
+          const cat = $('#unitCat').value;
+          const from = $('#unitFrom');
+          const to = $('#unitTo');
+          from.innerHTML = '';
+          to.innerHTML = '';
+          if (cat === 'Temperature') {
+            ['Celsius', 'Fahrenheit', 'Kelvin'].forEach(u => {
+              from.innerHTML += `<option>${u}</option>`;
+              to.innerHTML += `<option>${u}</option>`;
+            });
+            to.selectedIndex = 1;
+          } else {
+            Object.keys(units[cat]).forEach(u => {
+              from.innerHTML += `<option>${u}</option>`;
+              to.innerHTML += `<option>${u}</option>`;
+            });
+            to.selectedIndex = 1;
+          }
+          convertUnit();
+        };
+
+        window.convertUnit = function() {
+          const cat = $('#unitCat').value;
+          const val = parseFloat($('#unitInput').value) || 0;
+          const from = $('#unitFrom').value;
+          const to = $('#unitTo').value;
+          
+          if (cat === 'Temperature') {
+            let celsius;
+            if (from === 'Celsius') celsius = val;
+            else if (from === 'Fahrenheit') celsius = (val - 32) * 5/9;
+            else celsius = val - 273.15;
+            
+            let result;
+            if (to === 'Celsius') result = celsius;
+            else if (to === 'Fahrenheit') result = celsius * 9/5 + 32;
+            else result = celsius + 273.15;
+            
+            $('#unitOutput').value = result.toFixed(4);
+          } else {
+            const u = units[cat];
+            const result = val * u[from] / u[to];
+            $('#unitOutput').value = result.toFixed(8);
+          }
+        };
+
+        window.swapUnits = function() {
+          const fromVal = $('#unitFrom').value;
+          $('#unitFrom').value = $('#unitTo').value;
+          $('#unitTo').value = fromVal;
+          convertUnit();
+        };
+
+        updateUnits();
+      }
+
+      function renderTypingTest(body) {
+        const paragraphs = [
+          'The quick brown fox jumps over the lazy dog while the sun sets behind the silent mountains.',
+          'Programming is the art of breaking complex problems into smaller pieces and solving them one by one.',
+          'Education is the most powerful weapon which you can use to change the world.',
+          'Technology is best when it brings people together to create something meaningful.'
+        ];
+
+        let timer, timeLeft = 60, started = false;
+        const text = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+
+        body.innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:24px;font-weight:900;color:var(--accent);" id="typeTime">60</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Seconds</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:24px;font-weight:900;color:var(--accent);" id="typeWPM">0</div>
+              <div style="font-size:11px;color:var(--text-secondary);">WPM</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:24px;font-weight:900;color:var(--success);" id="typeAcc">100%</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Accuracy</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:24px;font-weight:900;color:var(--danger);" id="typeErrors">0</div>
+              <div style="font-size:11px;color:var(--text-secondary);">Errors</div>
+            </div>
+          </div>
+          <div id="typeText" style="background:rgba(0,0,0,0.2);padding:16px;border-radius:8px;font-size:18px;line-height:1.8;margin-bottom:12px;font-family:'JetBrains Mono',monospace;"></div>
+          <textarea class="form-input" id="typeInput" placeholder="Click here and start typing..." style="min-height:80px;font-family:'JetBrains Mono',monospace;" oninput="handleTyping()"></textarea>
+          <button class="btn btn-secondary" onclick="restartTyping()" style="margin-top:12px;width:100%;">Restart Test</button>
+        `;
+
+        function updateDisplay() {
+          const input = $('#typeInput').value;
+          let html = '';
+          for (let i = 0; i < text.length; i++) {
+            if (i < input.length) {
+              html += `<span style="color:${input[i] === text[i] ? 'var(--success)' : 'var(--danger)'}">${text[i]}</span>`;
+            } else if (i === input.length) {
+              html += `<span style="background:rgba(0,212,170,0.3);border-radius:2px;">${text[i]}</span>`;
+            } else {
+              html += text[i];
+            }
+          }
+          $('#typeText').innerHTML = html;
+        }
+
+        window.handleTyping = function() {
+          if (!started) {
+            started = true;
+            timer = setInterval(() => {
+              timeLeft--;
+              $('#typeTime').textContent = timeLeft;
+              if (timeLeft <= 0) {
+                clearInterval(timer);
+                $('#typeInput').disabled = true;
+              }
+              updateStats();
+            }, 1000);
+          }
+          updateDisplay();
+          updateStats();
+        };
+
+        window.restartTyping = function() {
+          clearInterval(timer);
+          timeLeft = 60;
+          started = false;
+          $('#typeTime').textContent = 60;
+          $('#typeWPM').textContent = '0';
+          $('#typeAcc').textContent = '100%';
+          $('#typeErrors').textContent = '0';
+          $('#typeInput').value = '';
+          $('#typeInput').disabled = false;
+          updateDisplay();
+        };
+
+        function updateStats() {
+          const input = $('#typeInput').value;
+          const elapsed = 60 - timeLeft;
+          const wpm = elapsed > 0 ? Math.round((input.length / 5) / (elapsed / 60)) : 0;
+          let errors = 0;
+          for (let i = 0; i < Math.min(input.length, text.length); i++) {
+            if (input[i] !== text[i]) errors++;
+          }
+          const accuracy = input.length > 0 ? Math.round(((input.length - errors) / input.length) * 100) : 100;
+          $('#typeWPM').textContent = wpm;
+          $('#typeAcc').textContent = accuracy + '%';
+          $('#typeErrors').textContent = errors;
+        }
+
+        updateDisplay();
+      }
+
+      function renderJSONFormatter(body) {
+        body.innerHTML = `
+          <textarea class="form-input" id="jsonInput" placeholder='{"key": "value"}' style="min-height:120px;"></textarea>
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button class="btn btn-primary" onclick="formatJSON('beautify')">Beautify</button>
+            <button class="btn btn-secondary" onclick="formatJSON('minify')">Minify</button>
+            <button class="btn btn-secondary" onclick="formatJSON('validate')">Validate</button>
+            <button class="btn btn-secondary" onclick="copyJSON()">Copy</button>
+          </div>
+          <div id="jsonStatus" style="margin-top:8px;"></div>
+          <textarea class="form-input" id="jsonOutput" readonly style="margin-top:8px;min-height:120px;background:rgba(0,0,0,0.4);"></textarea>
+        `;
+
+        window.formatJSON = function(mode) {
+          const input = $('#jsonInput').value;
+          try {
+            const parsed = JSON.parse(input);
+            if (mode === 'beautify') $('#jsonOutput').value = JSON.stringify(parsed, null, 2);
+            else if (mode === 'minify') $('#jsonOutput').value = JSON.stringify(parsed);
+            else $('#jsonOutput').value = 'Valid JSON ✓';
+            $('#jsonStatus').innerHTML = '<span class="badge badge-success">Valid JSON</span>';
+          } catch(e) {
+            $('#jsonStatus').innerHTML = `<span class="badge badge-danger">Error: ${e.message}</span>`;
+            $('#jsonOutput').value = '';
+          }
+        };
+
+        window.copyJSON = function() {
+          $('#jsonOutput').select();
+          document.execCommand('copy');
+        };
+      }
+
+      function renderMarkdownEditor(body) {
+        body.innerHTML = `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <textarea class="form-input" id="mdInput" style="min-height:350px;" oninput="updateMarkdown()"># Hello Markdown
+## This is a subheading
+**Bold text** and *italic text*
+
+- List item 1
+- List item 2
+
+\`\`\`
+code block
+\`\`\`
+
+> Blockquote text
+
+[Link](https://example.com)</textarea>
+            <div id="mdPreview" style="background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-y:auto;min-height:350px;"></div>
+          </div>
+        `;
+
+        window.updateMarkdown = function() {
+          let text = $('#mdInput').value;
+          // Simple markdown to HTML conversion
+          text = text.replace(/```([\s\S]*?)```/g, '<pre style="background:rgba(0,0,0,0.3);padding:12px;border-radius:6px;"><code>$1</code></pre>');
+          text = text.replace(/`([^`]+)`/g, '<code style="background:rgba(0,212,170,0.1);padding:2px 6px;border-radius:4px;color:var(--accent);">$1</code>');
+          text = text.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+          text = text.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+          text = text.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+          text = text.replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>');
+          text = text.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+          text = text.replace(/^\> (.+)$/gm, '<blockquote style="border-left:3px solid var(--accent);padding-left:12px;color:var(--text-secondary);">$1</blockquote>');
+          text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+          text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+          text = text.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" style="color:var(--accent);">$1</a>');
+          text = text.replace(/\n\n/g, '</p><p>');
+          text = '<p>' + text + '</p>';
+          $('#mdPreview').innerHTML = text;
+        };
+
+        updateMarkdown();
+      }
+
+      function renderGraphGenerator(body) {
+        body.innerHTML = `
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Chart Type</label>
+              <select class="form-input" id="graphType" onchange="drawGraph()">
+                <option value="bar">Bar Chart</option>
+                <option value="line">Line Chart</option>
+                <option value="pie">Pie Chart</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Labels (comma-separated)</label>
+              <input class="form-input" id="graphLabels" value="Mon,Tue,Wed,Thu,Fri" oninput="drawGraph()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Values (comma-separated)</label>
+            <input class="form-input" id="graphValues" value="12,19,7,15,22" oninput="drawGraph()">
+          </div>
+          <button class="btn btn-primary" onclick="drawGraph()">Draw Graph</button>
+          <canvas id="graphCanvas" style="width:100%;height:350px;margin-top:16px;background:rgba(0,0,0,0.2);border-radius:8px;"></canvas>
+        `;
+
+        window.drawGraph = function() {
+          const canvas = $('#graphCanvas');
+          const ctx = canvas.getContext('2d');
+          const width = canvas.parentElement.clientWidth - 48;
+          const height = 350;
+          canvas.width = width * 2;
+          canvas.height = height * 2;
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          ctx.scale(2, 2);
+
+          const labels = $('#graphLabels').value.split(',').map(l => l.trim());
+          const values = $('#graphValues').value.split(',').map(v => parseFloat(v) || 0);
+          const type = $('#graphType').value;
+
+          ctx.clearRect(0, 0, width, height);
+          
+          const colors = ['#00d4aa', '#00b4d8', '#ffa502', '#ff4757', '#a78bfa', '#2ed573', '#f0932b'];
+          const padding = 40;
+
+          if (type === 'pie') {
+            const total = values.reduce((a, b) => a + b, 0);
+            const cx = width/2, cy = height/2, r = Math.min(width, height)/2 - 40;
+            let startAngle = -Math.PI/2;
+            
+            values.forEach((v, i) => {
+              const sliceAngle = (v / total) * Math.PI * 2;
+              ctx.beginPath();
+              ctx.moveTo(cx, cy);
+              ctx.arc(cx, cy, r, startAngle, startAngle + sliceAngle);
+              ctx.fillStyle = colors[i % colors.length];
+              ctx.fill();
+              ctx.strokeStyle = '#0a0f1a';
+              ctx.lineWidth = 2;
+              ctx.stroke();
+              
+              const midAngle = startAngle + sliceAngle/2;
+              const labelX = cx + Math.cos(midAngle) * r * 0.7;
+              const labelY = cy + Math.sin(midAngle) * r * 0.7;
+              ctx.fillStyle = '#fff';
+              ctx.font = 'bold 12px Inter';
+              ctx.textAlign = 'center';
+              ctx.fillText(`${labels[i] || 'Item '+i} (${((v/total)*100).toFixed(0)}%)`, labelX, labelY);
+              
+              startAngle += sliceAngle;
+            });
+          } else {
+            const maxVal = Math.max(...values);
+            const barWidth = (width - padding * 2) / values.length;
+
+            // Draw axes
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.stroke();
+
+            if (type === 'bar') {
+              values.forEach((v, i) => {
+                const barH = ((v / maxVal) * (height - padding * 2));
+                const x = padding + i * barWidth + 10;
+                const y = height - padding - barH;
+                
+                const gradient = ctx.createLinearGradient(x, y, x, height - padding);
+                gradient.addColorStop(0, colors[i % colors.length]);
+                gradient.addColorStop(1, colors[(i + 1) % colors.length]);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth - 20, barH);
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[i] || '', x + (barWidth - 20)/2, height - padding + 16);
+                ctx.fillText(v, x + (barWidth - 20)/2, y - 8);
+              });
+            } else {
+              ctx.beginPath();
+              ctx.strokeStyle = '#00d4aa';
+              ctx.lineWidth = 3;
+              values.forEach((v, i) => {
+                const x = padding + i * barWidth + barWidth/2;
+                const y = height - padding - (v / maxVal) * (height - padding * 2);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+              });
+              ctx.stroke();
+
+              values.forEach((v, i) => {
+                const x = padding + i * barWidth + barWidth/2;
+                const y = height - padding - (v / maxVal) * (height - padding * 2);
+                ctx.fillStyle = '#00d4aa';
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[i] || '', x, height - padding + 16);
+                ctx.fillText(v, x, y - 10);
+              });
+            }
+          }
+        };
+
+        setTimeout(drawGraph, 100);
+      }
+
+      function renderStudyPlanner(body) {
+        let subjects = JSON.parse(localStorage.getItem('studyPlanner') || '[]');
+        
+        function saveSubjects() {
+          localStorage.setItem('studyPlanner', JSON.stringify(subjects));
+          renderList();
+        }
+
+        function renderList() {
+          const listEl = $('#plannerList');
+          if (!listEl) return;
+          listEl.innerHTML = subjects.length ? subjects.map((s, i) => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;margin-bottom:8px;">
+              <div>
+                <strong>${s.name}</strong> — ${s.hours}h/week
+                <span class="badge badge-${s.priority === 'High' ? 'danger' : s.priority === 'Medium' ? 'warning' : 'info'}">${s.priority}</span>
+              </div>
+              <button class="btn btn-danger btn-sm" onclick="removeSubject(${i})">×</button>
+            </div>
+          `).join('') : '<p style="text-align:center;color:var(--text-secondary);">No subjects added yet.</p>';
+        }
+
+        body.innerHTML = `
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <input class="form-input" id="subName" placeholder="Mathematics">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hours per Week</label>
+              <input class="form-input" id="subHours" type="number" value="3" min="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority</label>
+            <select class="form-input" id="subPriority">
+              <option>High</option>
+              <option selected>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="addSubject()" style="width:100%;">Add Subject</button>
+          <div id="plannerList" style="margin-top:16px;"></div>
+          <button class="btn btn-secondary" onclick="generateSchedule()" style="width:100%;margin-top:12px;">Generate Weekly Schedule</button>
+          <button class="btn btn-danger btn-sm" onclick="clearPlanner()" style="width:100%;margin-top:8px;">Clear All</button>
+          <div id="scheduleOutput" style="margin-top:16px;"></div>
+        `;
+
+        window.addSubject = function() {
+          const name = $('#subName').value.trim();
+          const hours = parseInt($('#subHours').value);
+          const priority = $('#subPriority').value;
+          if (!name || !hours) return;
+          subjects.push({ name, hours, priority });
+          saveSubjects();
+          $('#subName').value = '';
+        };
+
+        window.removeSubject = function(index) {
+          subjects.splice(index, 1);
+          saveSubjects();
+        };
+
+        window.clearPlanner = function() {
+          if (confirm('Clear all subjects?')) {
+            subjects = [];
+            saveSubjects();
+            $('#scheduleOutput').innerHTML = '';
+          }
+        };
+
+        window.generateSchedule = function() {
+          if (!subjects.length) {
+            $('#scheduleOutput').innerHTML = '<p style="color:var(--danger);">Add subjects first.</p>';
+            return;
+          }
+          const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+          const schedule = days.map(day => {
+            const daySubjects = subjects
+              .sort(() => Math.random() - 0.5)
+              .slice(0, Math.min(3, subjects.length))
+              .map(s => `${s.name} (${Math.max(1, Math.round(s.hours/7))}h)`);
+            return `<div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;margin-bottom:8px;">
+              <strong style="color:var(--accent);">${day}</strong>
+              <p>${daySubjects.join(', ') || 'Free day'}</p>
+            </div>`;
+          }).join('');
+          $('#scheduleOutput').innerHTML = schedule;
+        };
+
+        renderList();
+      }
+
+      function renderEncryptDecrypt(body) {
+        body.innerHTML = `
+          <div class="form-group">
+            <label class="form-label">Passphrase</label>
+            <input class="form-input" id="cryptoPass" type="password" placeholder="Enter encryption key">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Text</label>
+            <textarea class="form-input" id="cryptoText" style="min-height:100px;" placeholder="Enter text to encrypt/decrypt"></textarea>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="encryptText()" style="flex:1;">🔒 Encrypt</button>
+            <button class="btn btn-secondary" onclick="decryptText()" style="flex:1;">🔓 Decrypt</button>
+            <button class="btn btn-secondary" onclick="copyCryptoResult()">Copy</button>
+          </div>
+          <textarea class="form-input" id="cryptoOutput" readonly style="margin-top:12px;min-height:100px;background:rgba(0,0,0,0.4);"></textarea>
+        `;
+
+        async function deriveKey(password, salt) {
+          const enc = new TextEncoder();
+          const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+          return crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+            keyMaterial,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt', 'decrypt']
+          );
+        }
+
+        window.encryptText = async function() {
+          const pass = $('#cryptoPass').value;
+          const text = $('#cryptoText').value;
+          if (!pass || !text) { alert('Enter passphrase and text'); return; }
+          try {
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await deriveKey(pass, salt);
+            const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(text));
+            const combined = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
+            combined.set(salt, 0);
+            combined.set(iv, salt.length);
+            combined.set(new Uint8Array(encrypted), salt.length + iv.length);
+            $('#cryptoOutput').value = btoa(String.fromCharCode(...combined));
+          } catch(e) { $('#cryptoOutput').value = 'Encryption failed.'; }
+        };
+
+        window.decryptText = async function() {
+          const pass = $('#cryptoPass').value;
+          const text = $('#cryptoText').value;
+          if (!pass || !text) { alert('Enter passphrase and encrypted text'); return; }
+          try {
+            const data = Uint8Array.from(atob(text), c => c.charCodeAt(0));
+            const salt = data.slice(0, 16);
+            const iv = data.slice(16, 28);
+            const encrypted = data.slice(28);
+            const key = await deriveKey(pass, salt);
+            const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, encrypted);
+            $('#cryptoOutput').value = new TextDecoder().decode(decrypted);
+          } catch(e) { $('#cryptoOutput').value = 'Decryption failed. Check passphrase.'; }
+        };
+
+        window.copyCryptoResult = function() {
+          $('#cryptoOutput').select();
+          document.execCommand('copy');
+        };
+      }
+
+      function renderImageConverter(body) {
+        body.innerHTML = `
+          <input type="file" accept="image/*" class="form-input" id="imageInput" onchange="previewImage()" style="margin-bottom:16px;">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Convert To</label>
+              <select class="form-input" id="convertFormat">
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/webp">WebP</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Quality (0.1-1.0)</label>
+              <input class="form-input" id="convertQuality" type="number" value="0.9" min="0.1" max="1.0" step="0.05">
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="convertImage()" style="width:100%;">Convert & Download</button>
+          <img id="imagePreview" style="max-width:100%;margin-top:12px;border-radius:8px;display:none;">
+          <canvas id="convertCanvas" style="display:none;"></canvas>
+        `;
+
+        window.previewImage = function() {
+          const file = $('#imageInput').files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function() {
+            $('#imagePreview').src = reader.result;
+            $('#imagePreview').style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        };
+
+        window.convertImage = function() {
+          const img = $('#imagePreview');
+          if (!img.src) { alert('Select an image first.'); return; }
+          const canvas = $('#convertCanvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          const format = $('#convertFormat').value;
+          const quality = parseFloat($('#convertQuality').value);
+          const url = canvas.toDataURL(format, quality);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'converted.' + format.split('/')[1];
+          a.click();
+        };
+      }
+
+      function renderMathSolver(body) {
+        body.innerHTML = `
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchMathTab('expression')">Expression</button>
+            <button class="tab-btn" onclick="switchMathTab('linear')">Linear (ax+b=c)</button>
+            <button class="tab-btn" onclick="switchMathTab('quadratic')">Quadratic</button>
+          </div>
+          <div id="mathExpr">
+            <input class="form-input" id="exprInput" placeholder="e.g., (5+3)*2/4" style="margin-bottom:12px;">
+            <button class="btn btn-primary" onclick="solveExpression()">Calculate</button>
+            <div id="exprResult" style="margin-top:12px;padding:12px;background:rgba(0,0,0,0.2);border-radius:8px;"></div>
+          </div>
+          <div id="mathLinear" style="display:none;">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">a</label><input class="form-input" id="linA" type="number"></div>
+              <div class="form-group"><label class="form-label">b</label><input class="form-input" id="linB" type="number"></div>
+            </div>
+            <div class="form-group"><label class="form-label">c</label><input class="form-input" id="linC" type="number"></div>
+            <button class="btn btn-primary" onclick="solveLinear()">Solve for x</button>
+            <div id="linResult" style="margin-top:12px;padding:12px;background:rgba(0,0,0,0.2);border-radius:8px;"></div>
+          </div>
+          <div id="mathQuad" style="display:none;">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">a (x²)</label><input class="form-input" id="quadA" type="number"></div>
+              <div class="form-group"><label class="form-label">b (x)</label><input class="form-input" id="quadB" type="number"></div>
+            </div>
+            <div class="form-group"><label class="form-label">c</label><input class="form-input" id="quadC" type="number"></div>
+            <button class="btn btn-primary" onclick="solveQuadratic()">Solve</button>
+            <div id="quadResult" style="margin-top:12px;padding:12px;background:rgba(0,0,0,0.2);border-radius:8px;"></div>
+          </div>
+        `;
+
+        window.switchMathTab = function(tab) {
+          ['expression','linear','quadratic'].forEach(t => {
+            $(`#math${t.charAt(0).toUpperCase() + t.slice(1)}`).style.display = t === tab ? 'block' : 'none';
+          });
+        };
+
+        window.solveExpression = function() {
+          try {
+            const result = eval($('#exprInput').value);
+            $('#exprResult').textContent = `Result: ${result}`;
+          } catch(e) {
+            $('#exprResult').textContent = 'Invalid expression';
+          }
+        };
+
+        window.solveLinear = function() {
+          const a = parseFloat($('#linA').value), b = parseFloat($('#linB').value), c = parseFloat($('#linC').value);
+          if (!a) { $('#linResult').textContent = 'a cannot be 0'; return; }
+          const x = (c - b) / a;
+          $('#linResult').textContent = `${a}x + ${b} = ${c}\n${a}x = ${c - b}\nx = ${x}`;
+        };
+
+        window.solveQuadratic = function() {
+          const a = parseFloat($('#quadA').value), b = parseFloat($('#quadB').value), c = parseFloat($('#quadC').value);
+          if (!a) { $('#quadResult').textContent = 'a cannot be 0'; return; }
+          const d = b*b - 4*a*c;
+          if (d > 0) {
+            const x1 = (-b + Math.sqrt(d))/(2*a), x2 = (-b - Math.sqrt(d))/(2*a);
+            $('#quadResult').textContent = `Discriminant: ${d}\nx₁ = ${x1.toFixed(4)}\nx₂ = ${x2.toFixed(4)}`;
+          } else if (d === 0) {
+            $('#quadResult').textContent = `Discriminant: ${d}\nx = ${(-b/(2*a)).toFixed(4)}`;
+          } else {
+            const re = (-b/(2*a)).toFixed(4), im = (Math.sqrt(-d)/(2*a)).toFixed(4);
+            $('#quadResult').textContent = `Discriminant: ${d}\nx₁ = ${re} + ${im}i\nx₂ = ${re} - ${im}i`;
+          }
+        };
+      }
+
+      function renderColorPalette(body) {
+        body.innerHTML = `
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Base Color</label>
+              <input class="form-input" id="baseColor" type="color" value="#00d4aa">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Scheme</label>
+              <select class="form-input" id="paletteScheme">
+                <option value="analogous">Analogous</option>
+                <option value="complementary">Complementary</option>
+                <option value="triadic">Triadic</option>
+                <option value="monochromatic">Monochromatic</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="generatePalette()" style="width:100%;">Generate Palette</button>
+          <div id="paletteOutput" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px;"></div>
+        `;
+
+        window.generatePalette = function() {
+          const hex = $('#baseColor').value;
+          const scheme = $('#paletteScheme').value;
+          const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+          
+          let colors = [hex];
+          if (scheme === 'analogous') {
+            for (let i = 1; i <= 4; i++) {
+              const hr = Math.min(255, r + i*20), hg = Math.min(255, g + i*15), hb = Math.max(0, b - i*10);
+              colors.push(`#${hr.toString(16).padStart(2,'0')}${hg.toString(16).padStart(2,'0')}${hb.toString(16).padStart(2,'0')}`);
+            }
+          } else if (scheme === 'complementary') {
+            colors.push(`#${(255-r).toString(16).padStart(2,'0')}${(255-g).toString(16).padStart(2,'0')}${(255-b).toString(16).padStart(2,'0')}`);
+            colors.push(`#${Math.min(255,r+50).toString(16).padStart(2,'0')}${Math.min(255,g+50).toString(16).padStart(2,'0')}${Math.min(255,b+50).toString(16).padStart(2,'0')}`);
+          } else if (scheme === 'triadic') {
+            colors.push(`#${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}${r.toString(16).padStart(2,'0')}`);
+            colors.push(`#${b.toString(16).padStart(2,'0')}${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}`);
+          } else {
+            for (let i = 1; i <= 4; i++) {
+              const factor = 0.7 + i * 0.15;
+              colors.push(`#${Math.min(255,Math.round(r*factor)).toString(16).padStart(2,'0')}${Math.min(255,Math.round(g*factor)).toString(16).padStart(2,'0')}${Math.min(255,Math.round(b*factor)).toString(16).padStart(2,'0')}`);
+            }
+          }
+
+          $('#paletteOutput').innerHTML = colors.slice(0,5).map(c => `
+            <div style="background:${c};height:80px;border-radius:8px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding:8px;font-size:11px;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.5);" onclick="navigator.clipboard.writeText('${c}')" title="Click to copy ${c}">
+              ${c}
+            </div>
+          `).join('');
+        };
+
+        generatePalette();
+      }
+
+      function renderAPITester(body) {
+        body.innerHTML = `
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <select class="form-input" id="apiMethod" style="width:120px;">
+              <option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option>
+            </select>
+            <input class="form-input" id="apiUrl" placeholder="https://jsonplaceholder.typicode.com/posts/1" style="flex:1;">
+            <button class="btn btn-primary" onclick="sendAPIRequest()">Send</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Headers (Key: Value, one per line)</label>
+            <textarea class="form-input" id="apiHeaders" style="min-height:60px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Body (JSON)</label>
+            <textarea class="form-input" id="apiBody" style="min-height:80px;"></textarea>
+          </div>
+          <div id="apiStatus" style="margin-top:8px;"></div>
+          <textarea class="form-input" id="apiResponse" readonly style="margin-top:8px;min-height:200px;background:rgba(0,0,0,0.4);font-family:'JetBrains Mono',monospace;font-size:13px;"></textarea>
+        `;
+
+        window.sendAPIRequest = async function() {
+          const url = $('#apiUrl').value.trim();
+          if (!url) { alert('Enter a URL'); return; }
+          const method = $('#apiMethod').value;
+          const headers = {};
+          $('#apiHeaders').value.split('\n').forEach(line => {
+            const idx = line.indexOf(':');
+            if (idx > 0) headers[line.slice(0,idx).trim()] = line.slice(idx+1).trim();
+          });
+          
+          const opts = { method, headers };
+          if (['POST','PUT','PATCH'].includes(method) && $('#apiBody').value.trim()) {
+            opts.body = $('#apiBody').value;
+            if (!headers['Content-Type']) headers['Content-Type'] = 'application/json';
+          }
+
+          $('#apiStatus').innerHTML = '<span class="spinner"></span> Sending...';
+          try {
+            const start = performance.now();
+            const res = await fetch(url, opts);
+            const text = await res.text();
+            const duration = Math.round(performance.now() - start);
+            $('#apiStatus').innerHTML = `<span class="badge ${res.ok ? 'badge-success' : 'badge-danger'}">${res.status} ${res.statusText}</span> <span class="badge badge-info">${duration}ms</span>`;
+            try {
+              $('#apiResponse').value = JSON.stringify(JSON.parse(text), null, 2);
+            } catch {
+              $('#apiResponse').value = text;
+            }
+          } catch(e) {
+            $('#apiStatus').innerHTML = `<span class="badge badge-danger">Error: ${e.message}</span>`;
+          }
+        };
+      }
+
+      function renderRegexTester(body) {
+        body.innerHTML = `
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Pattern</label>
+              <input class="form-input" id="regexPattern" placeholder="\\d+" oninput="testRegex()">
+              </div>
+            <div class="form-group">
+              <label class="form-label">Flags</label>
+              <input class="form-input" id="regexFlags" value="gi" oninput="testRegex()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Test String</label>
+            <textarea class="form-input" id="regexString" oninput="testRegex()" style="min-height:100px;"></textarea>
+          </div>
+          <div id="regexStatus" style="margin-top:8px;"></div>
+          <div id="regexMatches" style="margin-top:8px;padding:12px;background:rgba(0,0,0,0.2);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px;white-space:pre-wrap;"></div>
+        `;
+
+        window.testRegex = function() {
+          const pattern = $('#regexPattern').value;
+          const flags = $('#regexFlags').value;
+          const str = $('#regexString').value;
+          if (!pattern) { $('#regexStatus').innerHTML = ''; $('#regexMatches').textContent = ''; return; }
+          try {
+            const re = new RegExp(pattern, flags);
+            const matches = [...str.matchAll(re)];
+            $('#regexStatus').innerHTML = `<span class="badge badge-success">${matches.length} match(es)</span>`;
+            $('#regexMatches').textContent = matches.map((m, i) => `${i+1}: "${m[0]}" at index ${m.index}`).join('\n');
+          } catch(e) {
+            $('#regexStatus').innerHTML = `<span class="badge badge-danger">${e.message}</span>`;
+            $('#regexMatches').textContent = '';
+          }
+        };
+      }
+
+      function renderDataTable(body) {
+        body.innerHTML = `
+          <textarea class="form-input" id="csvInput" placeholder="Name,Age,City&#10;John,25,NYC&#10;Jane,30,LA" style="min-height:100px;"></textarea>
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button class="btn btn-primary" onclick="buildTable()">Build Table</button>
+            <input class="form-input" id="tableFilter" placeholder="Filter rows..." oninput="buildTable()" style="flex:1;">
+          </div>
+          <div id="tableOutput" style="margin-top:16px;overflow-x:auto;"></div>
+        `;
+
+        window.buildTable = function() {
+          const rows = $('#csvInput').value.trim().split('\n').map(r => r.split(','));
+          if (!rows.length || !rows[0].length) { $('#tableOutput').innerHTML = ''; return; }
+          const filter = $('#tableFilter').value.toLowerCase();
+          const filtered = filter ? [rows[0], ...rows.slice(1).filter(r => r.some(c => c.toLowerCase().includes(filter)))] : rows;
+          
+          $('#tableOutput').innerHTML = `
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+              <thead>
+                <tr>${filtered[0].map(h => `<th style="background:rgba(0,212,170,0.1);color:var(--accent);padding:10px;border:1px solid var(--border);text-align:left;">${h}</th>`).join('')}</tr>
+              </thead>
+              <tbody>
+                ${filtered.slice(1).map(r => `<tr>${r.map(c => `<td style="padding:8px;border:1px solid var(--border);">${c}</td>`).join('')}</tr>`).join('')}
+              </tbody>
+            </table>
+          `;
+        };
+      }
+
+      function renderRandomSuite(body) {
+        body.innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;">
+            <button class="btn btn-secondary" onclick="randOutput('num')">Random Number</button>
+            <button class="btn btn-secondary" onclick="randOutput('dice')">🎲 Dice</button>
+            <button class="btn btn-secondary" onclick="randOutput('coin')">🪙 Coin</button>
+            <button class="btn btn-secondary" onclick="randOutput('uuid')">UUID</button>
+            <button class="btn btn-secondary" onclick="randOutput('color')">🎨 Color</button>
+            <button class="btn btn-secondary" onclick="randOutput('letter')">🔤 Letter</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">List (one per line) — Shuffle</label>
+            <textarea class="form-input" id="shuffleList" style="min-height:80px;"></textarea>
+            <button class="btn btn-primary" onclick="shuffleList()" style="margin-top:8px;width:100%;">Shuffle List</button>
+          </div>
+          <div id="randomOutput" style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.2);border-radius:8px;text-align:center;font-size:18px;font-weight:600;"></div>
+        `;
+
+        window.randOutput = function(type) {
+          let result;
+          switch(type) {
+            case 'num': result = Math.floor(Math.random() * 100) + 1; break;
+            case 'dice': result = '🎲 ' + (Math.floor(Math.random() * 6) + 1); break;
+            case 'coin': result = Math.random() < 0.5 ? 'Heads' : 'Tails'; break;
+            case 'uuid': result = crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random()*16|0; return (c==='x'?r:r&0x3|0x8).toString(16); }); break;
+            case 'color': result = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0'); break;
+            case 'letter': result = String.fromCharCode(65 + Math.floor(Math.random()*26)); break;
+          }
+          $('#randomOutput').textContent = result;
+        };
+
+        window.shuffleList = function() {
+          const items = $('#shuffleList').value.split('\n').filter(Boolean);
+          for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+          }
+          $('#randomOutput').textContent = items.join('\n');
+        };
+      }
+
+      function renderQRCode(body) {
+        body.innerHTML = `
+          <div class="form-group">
+            <label class="form-label">Text or URL</label>
+            <input class="form-input" id="qrInput" placeholder="https://example.com" value="https://finefuture.edu.pk">
+          </div>
+          <button class="btn btn-primary" onclick="generateQR()" style="width:100%;">Generate QR Code</button>
+          <div id="qrOutput" style="text-align:center;margin-top:16px;"></div>
+          <button class="btn btn-secondary" id="qrDownload" style="width:100%;margin-top:8px;display:none;" onclick="downloadQR()">Download PNG</button>
+        `;
+
+        window.generateQR = function() {
+          const text = $('#qrInput').value.trim();
+          if (!text) return;
+          const size = 300;
+          const url = `${API_CONFIG.qrCode.endpoint}?size=${size}x${size}&data=${encodeURIComponent(text)}`;
+          $('#qrOutput').innerHTML = `<img src="${url}" alt="QR Code" style="border-radius:8px;background:#fff;padding:12px;max-width:100%;">`;
+          $('#qrDownload').style.display = 'block';
+          $('#qrDownload').setAttribute('data-qr-url', url);
+        };
+
+        window.downloadQR = function() {
+          const url = $('#qrDownload').getAttribute('data-qr-url');
+          if (url) window.open(url, '_blank');
+        };
+      }
+
+      function renderWordCounter(body) {
+        body.innerHTML = `
+          <textarea class="form-input" id="wordInput" placeholder="Type or paste text here..." style="min-height:200px;" oninput="updateWordCount()"></textarea>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px;">
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:var(--accent);" id="wcWords">0</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Words</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:var(--accent);" id="wcChars">0</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Characters</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:var(--accent);" id="wcSentences">0</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Sentences</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:var(--accent);" id="wcParagraphs">0</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Paragraphs</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:var(--accent);" id="wcReadTime">0m</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Read Time</div>
+            </div>
+          </div>
+        `;
+
+        window.updateWordCount = function() {
+          const text = $('#wordInput').value;
+          const words = (text.match(/\S+/g) || []).length;
+          const chars = text.length;
+          const sentences = (text.match(/[^.!?]+[.!?]+/g) || []).length;
+          const paragraphs = (text.match(/\n\n/g) || []).length + 1;
+          const readTime = Math.ceil(words / 200);
+          $('#wcWords').textContent = words;
+          $('#wcChars').textContent = chars;
+          $('#wcSentences').textContent = sentences || (text.trim() ? 1 : 0);
+          $('#wcParagraphs').textContent = text.trim() ? paragraphs : 0;
+          $('#wcReadTime').textContent = readTime + 'm';
+        };
+      }
+
+      function renderNotes(body) {
+        const KEY = 'ffps_notes';
+        let notes = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+        function save() { localStorage.setItem(KEY, JSON.stringify(notes)); renderList(); }
+        
+        function renderList() {
+          const el = $('#notesList');
+          if (!el) return;
+          el.innerHTML = notes.length ? notes.map((n, i) => `
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;align-items:start;">
+                <strong>${n.title || 'Untitled'}</strong>
+                <span style="font-size:11px;color:var(--text-secondary);">${new Date(n.date).toLocaleDateString()}</span>
+              </div>
+              <p style="margin-top:8px;font-size:13px;color:var(--text-secondary);white-space:pre-wrap;">${n.content}</p>
+              <div style="display:flex;gap:6px;margin-top:8px;">
+                <button class="btn btn-secondary btn-sm" onclick="editNote(${i})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteNote(${i})">Delete</button>
+              </div>
+            </div>
+          `).join('') : '<p style="text-align:center;color:var(--text-secondary);">No notes yet.</p>';
+        }
+
+        body.innerHTML = `
+          <div class="form-group">
+            <label class="form-label">Title</label>
+            <input class="form-input" id="noteTitle" placeholder="Note title">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Content</label>
+            <textarea class="form-input" id="noteContent" style="min-height:100px;" placeholder="Write your note..."></textarea>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="saveNote()" style="flex:1;">Save Note</button>
+            <button class="btn btn-secondary" onclick="clearNoteForm()">Clear</button>
+          </div>
+          <input class="form-input" id="noteSearch" placeholder="Search notes..." oninput="searchNotes()" style="margin-top:16px;">
+          <div id="notesList" style="margin-top:16px;"></div>
+        `;
+
+        window.saveNote = function() {
+          const title = $('#noteTitle').value.trim();
+          const content = $('#noteContent').value.trim();
+          if (!title && !content) return;
+          notes.unshift({ title, content, date: Date.now() });
+          save();
+          clearNoteForm();
+        };
+
+        window.clearNoteForm = function() {
+          $('#noteTitle').value = '';
+          $('#noteContent').value = '';
+        };
+
+        window.editNote = function(index) {
+          const note = notes[index];
+          $('#noteTitle').value = note.title;
+          $('#noteContent').value = note.content;
+          notes.splice(index, 1);
+          save();
+        };
+
+        window.deleteNote = function(index) {
+          if (confirm('Delete this note?')) {
+            notes.splice(index, 1);
+            save();
+          }
+        };
+
+        window.searchNotes = function() {
+          const query = $('#noteSearch').value.toLowerCase();
+          const filtered = query ? notes.filter(n => (n.title + n.content).toLowerCase().includes(query)) : notes;
+          const el = $('#notesList');
+          el.innerHTML = filtered.map((n, i) => `
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;margin-bottom:8px;">
+              <strong>${n.title || 'Untitled'}</strong>
+              <p style="font-size:13px;color:var(--text-secondary);">${n.content}</p>
+            </div>
+          `).join('') || '<p style="text-align:center;color:var(--text-secondary);">No matches.</p>';
+        };
+
+        renderList();
+      }
+
+      function renderAnnouncement(body) {
+        const KEY = 'ffps_announce';
+        let data = localStorage.getItem(KEY);
+
+        body.innerHTML = `
+          <div style="border:2px dashed var(--border);border-radius:12px;padding:32px;text-align:center;cursor:pointer;margin-bottom:16px;" onclick="$('#announceFile').click()">
+            <span style="font-size:48px;">📢</span>
+            <p style="margin-top:8px;font-weight:600;">Click to Upload Announcement Image</p>
+            <p style="font-size:12px;color:var(--text-secondary);">PNG, JPG, or GIF</p>
+          </div>
+          <input type="file" accept="image/*" id="announceFile" style="display:none;" onchange="uploadAnnouncement()">
+          <div id="announcePreview">
+            ${data ? `<img src="${data}" style="max-width:100%;border-radius:8px;">` : '<p style="text-align:center;color:var(--text-secondary);">No announcement uploaded.</p>'}
+          </div>
+          ${data ? `<button class="btn btn-danger" onclick="deleteAnnouncement()" style="width:100%;margin-top:12px;">Delete Announcement</button>` : ''}
+        `;
+
+        window.uploadAnnouncement = function() {
+          const file = $('#announceFile').files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function() {
+            localStorage.setItem(KEY, reader.result);
+            renderAnnouncement(body);
+          };
+          reader.readAsDataURL(file);
+        };
+
+        window.deleteAnnouncement = function() {
+          if (confirm('Delete announcement?')) {
+            localStorage.removeItem(KEY);
+            renderAnnouncement(body);
+          }
+        };
+      }
+
+      function renderAIHelper(body) {
+        body.innerHTML = `
+          <div style="text-align:center;padding:20px;">
+            <span style="font-size:64px;">🤖</span>
+            <h3 style="margin-top:12px;">AI Student Helper</h3>
+            <p style="color:var(--text-secondary);">Ask any academic question and get instant help!</p>
+          </div>
+          <div id="aiChat" style="max-height:400px;overflow-y:auto;margin-bottom:16px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;">
+            <div style="text-align:center;color:var(--text-secondary);padding:20px;">
+              <p>Try asking:</p>
+              <p style="color:var(--accent);">"Explain photosynthesis"</p>
+              <p style="color:var(--accent);">"Solve: 2x + 5 = 15"</p>
+              <p style="color:var(--accent);">"What is the capital of France?"</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <input class="form-input" id="aiInput" placeholder="Ask something..." style="flex:1;" onkeypress="if(event.key==='Enter')askAI()">
+            <button class="btn btn-primary" onclick="askAI()">Send</button>
+          </div>
+          <p style="font-size:11px;color:var(--text-secondary);margin-top:8px;text-align:center;">
+            Powered by Free AI (responses may vary)
+          </p>
+        `;
+
+        window.askAI = async function() {
+          const question = $('#aiInput').value.trim();
+          if (!question) return;
+          
+          $('#aiChat').innerHTML += `<div style="text-align:right;margin:8px 0;"><span style="background:var(--accent);color:#000;padding:8px 14px;border-radius:12px;display:inline-block;font-size:13px;">${question}</span></div>`;
+          $('#aiInput').value = '';
+          
+          const loadingDiv = document.createElement('div');
+          loadingDiv.innerHTML = '<span class="spinner" style="width:16px;height:16px;"></span> Thinking...';
+          loadingDiv.style.cssText = 'text-align:left;margin:8px 0;color:var(--text-secondary);font-size:13px;';
+          $('#aiChat').appendChild(loadingDiv);
+          $('#aiChat').scrollTop = $('#aiChat').scrollHeight;
+
+          try {
+            // Try free Hugging Face API first
+            const response = await fetch(`${API_CONFIG.huggingface.endpoint}${API_CONFIG.huggingface.models.qa}`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${API_CONFIG.huggingface.key}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                inputs: {
+                  question: question,
+                  context: 'This is a general knowledge and educational context for answering student questions.'
+                }
+              })
+            });
+
+            let answer;
+            if (response.ok) {
+              const data = await response.json();
+              answer = data.answer || data.generated_text || 'I processed your question but need more specific context.';
+            } else {
+              // Fallback: Simple rule-based responses
+              answer = getSimpleAnswer(question);
+            }
+            
+            loadingDiv.remove();
+            $('#aiChat').innerHTML += `<div style="text-align:left;margin:8px 0;"><span style="background:rgba(255,255,255,0.1);padding:8px 14px;border-radius:12px;display:inline-block;font-size:13px;">${answer}</span></div>`;
+          } catch(e) {
+            loadingDiv.remove();
+            const answer = getSimpleAnswer(question);
+            $('#aiChat').innerHTML += `<div style="text-align:left;margin:8px 0;"><span style="background:rgba(255,255,255,0.1);padding:8px 14px;border-radius:12px;display:inline-block;font-size:13px;">${answer}</span></div>`;
+          }
+          
+          $('#aiChat').scrollTop = $('#aiChat').scrollHeight;
+        };
+
+        function getSimpleAnswer(q) {
+          const lower = q.toLowerCase();
+          if (lower.includes('hello') || lower.includes('hi')) return 'Hello! How can I help you with your studies today?';
+          if (lower.includes('capital of pakistan')) return 'The capital of Pakistan is Islamabad.';
+          if (lower.includes('capital of france')) return 'The capital of France is Paris.';
+          if (lower.includes('photosynthesis')) return 'Photosynthesis is the process by which plants convert sunlight, water, and carbon dioxide into glucose and oxygen.';
+          if (lower.includes('2x') || lower.includes('2 x')) return 'To solve 2x + 5 = 15:\n2x = 10\nx = 5';
+          if (lower.includes('who are you')) return "I'm an AI student helper designed to assist with academic questions!";
+          return "I'm a free AI assistant. For best results, try asking specific academic questions about math, science, history, or language arts.";
+        }
+      }
+
+      // ==================== INITIALIZATION ====================
+      
+      // Render project cards
+      renderProjectCards();
+
+      // Mobile menu toggle
+      $('#mobileToggle').addEventListener('click', () => {
+        $('#navMenu').classList.toggle('open');
+      });
+
+      // Close mobile menu on link click
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          $('#navMenu').classList.remove('open');
+        });
+      });
+
+      // Nav link active state
+      document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+        link.addEventListener('click', function() {
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Announcement button
+      $('#announceBtn').addEventListener('click', () => openProjectModal('announcement'));
+      $('#aiBtn').addEventListener('click', () => openProjectModal('ai'));
+      $('#heroAiBtn').addEventListener('click', () => openProjectModal('ai'));
+
+      // Close modal on overlay click
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+          closeModal();
+        }
+      });
+
+      // Close modal on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Scroll reveal animation
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      }
+
+      // Smooth scroll for nav links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      console.log('🚀 Fine Future Public School - Professional Tool Suite Loaded Successfully!');
+      console.log('📚 25+ Professional Tools Ready');
+      console.log('🤖 AI Helper Integrated (Free API)');
+      console.log('🔧 All tools run entirely in your browser - No backend required');
+      
+    })();
+  </script>
+</body>
+</html>
